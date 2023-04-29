@@ -4,10 +4,6 @@ import helmet from "helmet";
 import errorMiddleware from "./middlewares";
 import dbInstance, { Database } from "../database";
 
-const DB_NAME = process.env.DB_NAME ?? "";
-const DB_USERNAME = process.env.DB_USERNAME ?? "";
-const DB_PASS = process.env.DB_PASS ?? "";
-
 class Server {
   public readonly app: Express;
   private readonly dbInstance: Database = dbInstance;
@@ -16,7 +12,7 @@ class Server {
     this.app = express();
     this.initMiddlewares();
     this.initErrorMiddleware();
-    this.dbInstance.initConnection(DB_USERNAME, DB_PASS, DB_NAME);
+    this.dbInstance.initConnection();
   }
 
   private initMiddlewares() {

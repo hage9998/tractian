@@ -1,31 +1,31 @@
+import config from "../../commons/config";
 import mongoose from "mongoose";
 
 interface DatabaseMethods {
-  initConnection(
-    username: string,
-    password: string,
-    databaseName: string
-  ): Promise<void>;
+  initConnection(): Promise<void>;
 }
 
 export class Database implements DatabaseMethods {
   connection = mongoose.connection;
+  name: string;
+  username: string;
+  password: string;
 
   constructor() {
-    const dataBaseConnection = console.info.bind(console, "Connection: ");
+    const logConnection = console.info.bind(console, "Connection: ");
+
+    this.name = config.dbName ?? "";
+    this.username = config.dbUsername ?? "";
+    this.password = config.dbPassword ?? "";
 
     this.connection
-      .on("open", console.info.bind(console, dataBaseConnection("open")))
-      .on("close", console.info.bind(console, dataBaseConnection("close")));
+      .on("open", () => logConnection("open"))
+      .on("close", () => logConnection("close"));
   }
 
-  async initConnection(
-    username: string,
-    password: string,
-    databaseName: string
-  ): Promise<void> {
+  async initConnection(): Promise<void> {
     await mongoose.connect(
-      `mongodb+srv://${username}:<${password}>@${databaseName}.3sculol.mongodb.net/?retryWrites=true&w=majority`
+      `mongodb+srv://${this.username}:${this.password}@${this.name}.3sculol.mongodb.net/?retryWrites=true&w=majority`
     );
   }
 }

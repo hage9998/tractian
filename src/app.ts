@@ -1,12 +1,13 @@
-import dotenv from "dotenv";
+import config from "./commons/config";
 import Server from "./infrastructure/appServer";
 
 const startServer = () => {
-  dotenv.config();
-  const server = new Server();
-  const port = process.env.PORT ?? "3000";
+  {
+    const server = new Server();
+    const port = config.port ?? "3000";
 
-  server.app.listen(port);
+    server.app.listen(port);
+  }
 };
 
 startServer();
