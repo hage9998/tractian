@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "start": "tsc && node dist/app.js",
-    "start:dev": "nodemon --watch 'src/' --exec 'ts-node src/app.ts' -e ts"
+    "start:dev": "nodemon --watch 'src/' --exec 'ts-node src/app.ts' -e ts",
+    "lint": "eslint ./src"
   },
   "author": "Lucas Hage",
   "license": "ISC",

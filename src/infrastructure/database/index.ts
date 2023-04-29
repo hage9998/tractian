@@ -8,7 +8,7 @@ interface DatabaseMethods {
   ): Promise<void>;
 }
 
-class Database implements DatabaseMethods {
+export class Database implements DatabaseMethods {
   connection = mongoose.connection;
 
   constructor() {
