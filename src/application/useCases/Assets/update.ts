@@ -8,7 +8,7 @@ export type UpdateAssetRequest = {
   asset: Omit<Asset, "owner">;
 };
 
-export type IUpdateAssetUseCase = UseCase<UpdateAssetRequest, Promise<Asset>>;
+export type IUpdateAssetUseCase = UseCase<UpdateAssetRequest, Promise<void>>;
 
 @injectable()
 export class UpdateAssetUseCase implements IUpdateAssetUseCase {
@@ -18,10 +18,8 @@ export class UpdateAssetUseCase implements IUpdateAssetUseCase {
     this.assetRepository = assetRepository;
   }
 
-  async execute(request: UpdateAssetRequest): Promise<Asset> {
+  async execute(request: UpdateAssetRequest): Promise<void> {
     const { assetId, asset } = request;
-    const updatedAsset = await this.assetRepository.updateById(assetId, asset);
-
-    return updatedAsset;
+    await this.assetRepository.updateById(assetId, asset);
   }
 }

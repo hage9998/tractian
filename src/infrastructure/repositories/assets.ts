@@ -15,7 +15,6 @@ class AssetRepository implements IAssetRepository {
       healthLevel,
       image
     });
-    // eslint-disable-next-line no-useless-catch
     try {
       const createdAsset = await assetModel.save();
       return {
@@ -23,18 +22,35 @@ class AssetRepository implements IAssetRepository {
         owner: createdAsset.owner?.prototype?.toString()
       } as Asset;
     } catch (error) {
-      throw new Error("Failed to create new assets");
+      throw new Error(`Failed to create new asset: ${error}`);
     }
   }
 
-  updateById(): Promise<Asset> {
-    throw new Error("Method not implemented.");
+  async updateById(
+    id: string,
+    asset: Partial<Omit<Asset, "owner">>
+  ): Promise<void> {
+    try {
+      await AssetModel.updateOne({ _id: id }, asset);
+    } catch (error) {
+      throw new Error(`Failed to update asset: ${error}`);
+    }
   }
-  deleteById(): Promise<void> {
-    throw new Error("Method not implemented.");
+
+  async deleteById(id: string): Promise<void> {
+    try {
+      await AssetModel.deleteOne({ _id: id });
+    } catch (error) {
+      throw new Error(`Failed to delete asset: ${error}`);
+    }
   }
-  getById(): Promise<Asset> {
-    throw new Error("Method not implemented.");
+
+  async getById(id: string): Promise<Asset> {
+    try {
+      return await AssetModel.findOne({ _id: id });
+    } catch (error) {
+      throw new Error(`Failed to get asset: ${error}`);
+    }
   }
 }
 
