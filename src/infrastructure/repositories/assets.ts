@@ -2,24 +2,25 @@ import { IAssetRepository } from "../../domain/repositories/assets";
 import { Asset } from "../../domain/types";
 import { injectable } from "tsyringe";
 import { AssetModel } from "../../domain/models";
+import { Types } from "mongoose";
 
 @injectable()
 class AssetRepository implements IAssetRepository {
   async create(asset: Asset): Promise<Asset> {
     const { name, description, healthLevel, image, model, status } = asset;
-    const assetModel = new AssetModel({
-      name,
-      description,
-      model,
-      status,
-      healthLevel,
-      image
-    });
     try {
-      const createdAsset = await assetModel.save();
+      const createdAsset = await AssetModel.create({
+        name,
+        description,
+        model,
+        status,
+        healthLevel,
+        image
+      });
+
       return {
-        ...asset,
-        owner: createdAsset.owner?.prototype?.toString()
+        _id: createdAsset._id.toString(),
+        ...asset
       } as Asset;
     } catch (error) {
       throw new Error(`Failed to create new asset: ${error}`);
@@ -31,7 +32,7 @@ class AssetRepository implements IAssetRepository {
     asset: Partial<Omit<Asset, "owner">>
   ): Promise<void> {
     try {
-      await AssetModel.updateOne({ _id: id }, asset);
+      await AssetModel.updateOne({ _id: id }, asset, { runValidators: true });
     } catch (error) {
       throw new Error(`Failed to update asset: ${error}`);
     }
@@ -50,6 +51,14 @@ class AssetRepository implements IAssetRepository {
       return await AssetModel.findOne({ _id: id });
     } catch (error) {
       throw new Error(`Failed to get asset: ${error}`);
+    }
+  }
+
+  async getManyByOwnerId(ownerId: string): Promise<Asset[]> {
+    try {
+      return await AssetModel.find({ owner: new Types.ObjectId(ownerId) });
+    } catch (error) {
+      throw new Error(`Failed to get assets: ${error}`);
     }
   }
 }

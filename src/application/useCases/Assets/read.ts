@@ -20,7 +20,19 @@ export class ListAssetUseCase implements IListAssetUseCase {
   async execute(request: ListAssetRequest): Promise<Asset> {
     const { assetId } = request;
     const listedAsset = await this.assetRepository.getById(assetId);
+    if (listedAsset) {
+      const responseAsset: Asset = {
+        _id: listedAsset._id,
+        name: listedAsset.name,
+        description: listedAsset.description,
+        model: listedAsset.model,
+        status: listedAsset.status,
+        healthLevel: listedAsset.healthLevel,
+        image: listedAsset.image
+      };
 
-    return listedAsset;
+      return responseAsset;
+    }
+    throw new Error("Asset does not exist");
   }
 }
