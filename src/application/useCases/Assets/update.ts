@@ -8,13 +8,13 @@ export type UpdateAssetRequest = {
   asset: Omit<Asset, "owner">;
 };
 
+export type IUpdateAssetUseCase = UseCase<UpdateAssetRequest, Promise<Asset>>;
+
 @injectable()
-export class UpdateAssetUseCase
-  implements UseCase<UpdateAssetRequest, Promise<Asset>>
-{
+export class UpdateAssetUseCase implements IUpdateAssetUseCase {
   private assetRepository: IAssetRepository;
 
-  constructor(@inject("AssetRepository") assetRepository: IAssetRepository) {
+  constructor(@inject("IAssetRepository") assetRepository: IAssetRepository) {
     this.assetRepository = assetRepository;
   }
 

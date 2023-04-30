@@ -6,13 +6,13 @@ export type DeleteAssetRequest = {
   assetId: string;
 };
 
+export type IDeleteAssetUseCase = UseCase<DeleteAssetRequest, Promise<void>>;
+
 @injectable()
-export class DeleteAssetUseCase
-  implements UseCase<DeleteAssetRequest, Promise<void>>
-{
+export class DeleteAssetUseCase implements IDeleteAssetUseCase {
   private assetRepository: IAssetRepository;
 
-  constructor(@inject("AssetRepository") assetRepository: IAssetRepository) {
+  constructor(@inject("IAssetRepository") assetRepository: IAssetRepository) {
     this.assetRepository = assetRepository;
   }
 

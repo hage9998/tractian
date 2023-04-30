@@ -1,20 +1,18 @@
 {
   "compilerOptions": {
-    "experimentalDecorators": true,
     "module": "commonjs",
     "target": "esnext",
     "outDir": "./dist",
     "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "isolatedModules": true,
     "preserveConstEnums": true,
     "forceConsistentCasingInFileNames": true,
     "removeComments": true,
     "importHelpers": true,
 
-    "strict": true,
-    "strictFunctionTypes": true,
-    "strictNullChecks": true,
-    "strictPropertyInitialization": true,
+    "strictPropertyInitialization": false,
     "skipLibCheck": true,
     "sourceMap": true,
     "noImplicitReturns": true,

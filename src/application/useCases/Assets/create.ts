@@ -7,13 +7,13 @@ export type CreateAssetRequest = {
   asset: Omit<Asset, "owner">;
 };
 
+export type ICreateAssetUseCase = UseCase<CreateAssetRequest, Promise<Asset>>;
+
 @injectable()
-export class CreateAssetUseCase
-  implements UseCase<CreateAssetRequest, Promise<Asset>>
-{
+export class CreateAssetUseCase implements ICreateAssetUseCase {
   private assetRepository: IAssetRepository;
 
-  constructor(@inject("AssetRepository") assetRepository: IAssetRepository) {
+  constructor(@inject("IAssetRepository") assetRepository: IAssetRepository) {
     this.assetRepository = assetRepository;
   }
 

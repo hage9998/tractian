@@ -7,13 +7,13 @@ export type ListAssetRequest = {
   assetId: string;
 };
 
+export type IListAssetUseCase = UseCase<ListAssetRequest, Promise<Asset>>;
+
 @injectable()
-export class ListAssetUseCase
-  implements UseCase<ListAssetRequest, Promise<Asset>>
-{
+export class ListAssetUseCase implements IListAssetUseCase {
   private assetRepository: IAssetRepository;
 
-  constructor(@inject("AssetRepository") assetRepository: IAssetRepository) {
+  constructor(@inject("IAssetRepository") assetRepository: IAssetRepository) {
     this.assetRepository = assetRepository;
   }
 
