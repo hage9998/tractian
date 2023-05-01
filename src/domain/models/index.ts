@@ -1,6 +1,5 @@
 import { model } from "mongoose";
-import { AssetSchema } from "../schemas";
+import { AssetSchema, UnitSchema } from "../schemas";
 
-const AssetModel = model("Asset", AssetSchema);
-
-export default AssetModel;
+export const AssetModel = model("Asset", AssetSchema);
+export const UnitModel = model("Asset", UnitSchema);

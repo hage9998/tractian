@@ -21,3 +21,13 @@ export const AssetSchema = new Schema({
   },
   image: String
 });
+
+export const UnitSchema = new Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  description: String,
+  company: { type: Types.ObjectId, ref: "Company" },
+  assets: [{ type: Types.ObjectId, ref: "Unit" }]
+});

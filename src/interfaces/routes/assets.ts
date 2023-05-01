@@ -21,7 +21,7 @@ export class AssetsRoutes {
     this.router.delete("/asset/:assetId", this.assetsController.deleteAsset);
     this.router.get(
       "/asset/owner/:ownerId",
-      this.assetsController.listManyByOwnerAsset
+      this.assetsController.listManyAssetByOwner
     );
   }
 }

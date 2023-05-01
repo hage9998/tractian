@@ -3,21 +3,21 @@ import { inject, injectable } from "tsyringe";
 import {
   CreateAssetRequest,
   ICreateAssetUseCase
-} from "../../application/useCases/Assets/create";
-import { IDeleteAssetUseCase } from "../../application/useCases/Assets/delete";
-import { IListAssetAllByOwnerUseCase } from "../../application/useCases/Assets/listAll";
-import { IListAssetUseCase } from "../../application/useCases/Assets/read";
+} from "../../application/useCases/assets/create";
+import { IDeleteAssetUseCase } from "../../application/useCases/assets/delete";
+import { IListAssetAllByOwnerUseCase } from "../../application/useCases/assets/listByOwner";
+import { IListAssetUseCase } from "../../application/useCases/assets/read";
 import {
   IUpdateAssetUseCase,
   UpdateAssetRequest
-} from "../../application/useCases/Assets/update";
+} from "../../application/useCases/assets/update";
 
 export interface IAssetsController {
   createAsset(req: Request, res: Response, next: NextFunction): Promise<void>;
   updateAsset(req: Request, res: Response, next: NextFunction): Promise<void>;
   listAsset(req: Request, res: Response, next: NextFunction): Promise<void>;
   deleteAsset(req: Request, res: Response, next: NextFunction): Promise<void>;
-  listManyByOwnerAsset(
+  listManyAssetByOwner(
     req: Request,
     res: Response,
     next: NextFunction
@@ -50,7 +50,7 @@ export class AssetsController implements IAssetsController {
     this.updateAsset = this.updateAsset.bind(this);
     this.listAsset = this.listAsset.bind(this);
     this.deleteAsset = this.deleteAsset.bind(this);
-    this.listManyByOwnerAsset = this.listManyByOwnerAsset.bind(this);
+    this.listManyAssetByOwner = this.listManyAssetByOwner.bind(this);
   }
 
   async createAsset(req: Request, res: Response, next: NextFunction) {
@@ -104,7 +104,7 @@ export class AssetsController implements IAssetsController {
     }
   }
 
-  async listManyByOwnerAsset(req: Request, res: Response, next: NextFunction) {
+  async listManyAssetByOwner(req: Request, res: Response, next: NextFunction) {
     try {
       const { ownerId } = req.params;
       const response = await this.listAssetAllByOwnerUseCase.execute({

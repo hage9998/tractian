@@ -3,7 +3,7 @@ import sinon from "sinon";
 import request from "supertest";
 import Server from "../../../../infrastructure/appServer";
 import AssetRepository from "../../../../infrastructure/repositories/assets";
-import { UpdateAssetRequest } from "../../../../application/useCases/Assets/update";
+import { UpdateAssetRequest } from "../../../../application/useCases/assets/update";
 
 describe("Test asset routes", () => {
   const server = new Server();

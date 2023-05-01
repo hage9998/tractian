@@ -1,10 +1,10 @@
-import { UseCase } from "./../../../commons/useCase";
+import { UseCase } from "../../../commons/useCase";
 import { inject, injectable } from "tsyringe";
 import { Asset } from "../../../domain/types";
 import { IAssetRepository } from "../../../domain/repositories/assets";
 
 export type CreateAssetRequest = {
-  asset: Omit<Asset, "owner">;
+  asset: Omit<Asset, "_id">;
 };
 
 export type ICreateAssetUseCase = UseCase<CreateAssetRequest, Promise<Asset>>;

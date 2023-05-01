@@ -2,23 +2,23 @@ import { container } from "tsyringe";
 import {
   ICreateAssetUseCase,
   CreateAssetUseCase
-} from "../../application/useCases/Assets/create";
+} from "../../application/useCases/assets/create";
 import {
   IDeleteAssetUseCase,
   DeleteAssetUseCase
-} from "../../application/useCases/Assets/delete";
+} from "../../application/useCases/assets/delete";
 import {
   IListAssetAllByOwnerUseCase,
   ListAssetAllByOwnerUseCase
-} from "../../application/useCases/Assets/listAll";
+} from "../../application/useCases/assets/listByOwner";
 import {
   IListAssetUseCase,
   ListAssetUseCase
-} from "../../application/useCases/Assets/read";
+} from "../../application/useCases/assets/read";
 import {
   IUpdateAssetUseCase,
   UpdateAssetUseCase
-} from "../../application/useCases/Assets/update";
+} from "../../application/useCases/assets/update";
 import { IAssetRepository } from "../../domain/repositories/assets";
 import {
   IAssetsController,

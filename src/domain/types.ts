@@ -8,3 +8,11 @@ export interface Asset {
   healthLevel: number;
   image: string;
 }
+
+export interface Unit {
+  _id?: string;
+  name: string;
+  description: string;
+  company?: string;
+  assets: string[];
+}

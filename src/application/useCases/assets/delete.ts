@@ -1,4 +1,4 @@
-import { UseCase } from "./../../../commons/useCase";
+import { UseCase } from "../../../commons/useCase";
 import { inject, injectable } from "tsyringe";
 import { IAssetRepository } from "../../../domain/repositories/assets";
 
