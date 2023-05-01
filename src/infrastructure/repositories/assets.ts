@@ -1,7 +1,7 @@
 import { IAssetRepository } from "../../domain/repositories/assets";
 import { Asset } from "../../domain/types";
 import { injectable } from "tsyringe";
-import { AssetModel } from "../../domain/models";
+import AssetModel from "../../domain/models";
 import { Types } from "mongoose";
 
 @injectable()

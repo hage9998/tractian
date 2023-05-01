@@ -5,7 +5,7 @@ import { IAssetRepository } from "../../../domain/repositories/assets";
 
 export type UpdateAssetRequest = {
   assetId: string;
-  asset: Omit<Asset, "owner">;
+  asset: Omit<Asset, "_id">;
 };
 
 export type IUpdateAssetUseCase = UseCase<UpdateAssetRequest, Promise<void>>;

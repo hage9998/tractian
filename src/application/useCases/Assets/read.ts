@@ -28,7 +28,8 @@ export class ListAssetUseCase implements IListAssetUseCase {
         model: listedAsset.model,
         status: listedAsset.status,
         healthLevel: listedAsset.healthLevel,
-        image: listedAsset.image
+        image: listedAsset.image,
+        owner: listedAsset.owner
       };
 
       return responseAsset;

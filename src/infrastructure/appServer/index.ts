@@ -3,7 +3,6 @@ import express, { Express } from "express";
 import cors from "cors";
 import helmet from "helmet";
 import errorMiddleware from "./middlewares";
-import dbInstance, { Database } from "../database";
 import { AssetsRoutes } from "../../interfaces/routes/assets";
 import { container } from "tsyringe";
 import {
@@ -14,12 +13,10 @@ import {
 
 class Server {
   public readonly app: Express;
-  private readonly dbInstance: Database = dbInstance;
   private assetsRoutes: AssetsRoutes;
 
   constructor() {
     this.app = express();
-    this.dbInstance.initConnection();
     this.initMiddlewares();
     this.registerDependencies();
     this.resolveDependencies();
