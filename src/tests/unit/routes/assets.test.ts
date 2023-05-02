@@ -65,7 +65,7 @@ describe("Test asset routes", () => {
     expect(response.status).toBe(204);
   });
 
-  test("should delete a asset object", async () => {
+  test("should get many assets objects by owner", async () => {
     sinon
       .stub(AssetRepository.prototype, "getManyByOwnerId")
       .resolves([mockAsset, mockAsset]);

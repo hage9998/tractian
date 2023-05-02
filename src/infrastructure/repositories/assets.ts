@@ -50,7 +50,9 @@ class AssetRepository implements IAssetRepository {
 
   async getById(id: string): Promise<Asset> {
     try {
-      return await AssetModel.findOne({ _id: id });
+      return await AssetModel.findOne({ _id: id })
+        .select("-__v")
+        .populate({ path: "owner", select: "name" });
     } catch (error) {
       throw new Error(`Failed to get asset: ${error}`);
     }
@@ -60,7 +62,9 @@ class AssetRepository implements IAssetRepository {
     try {
       return await AssetModel.find({
         owner: new Types.ObjectId(ownerId)
-      }).populate({ path: "owner", select: "name" });
+      })
+        .select("-__v")
+        .populate({ path: "owner", select: "name" });
     } catch (error) {
       throw new Error(`Failed to get assets: ${error}`);
     }
@@ -68,7 +72,7 @@ class AssetRepository implements IAssetRepository {
 
   async getAll(): Promise<Asset[]> {
     try {
-      return await AssetModel.find().populate({
+      return await AssetModel.find().select("-__v").populate({
         path: "owner",
         select: "name"
       });

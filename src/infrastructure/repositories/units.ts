@@ -46,7 +46,10 @@ class UnitRepository implements IUnitRepository {
 
   async getById(id: string): Promise<Unit> {
     try {
-      return await UnitModel.findOne({ _id: id }).populate("assets");
+      return await UnitModel.findOne({ _id: id }).select("-__v").populate({
+        path: "company",
+        select: "name"
+      });
     } catch (error) {
       throw new Error(`Failed to get unit: ${error}`);
     }
@@ -56,10 +59,12 @@ class UnitRepository implements IUnitRepository {
     try {
       return await UnitModel.find({
         owner: new Types.ObjectId(companyId)
-      }).populate({
-        path: "company",
-        select: "name"
-      });
+      })
+        .select("-__v")
+        .populate({
+          path: "company",
+          select: "name"
+        });
     } catch (error) {
       throw new Error(`Failed to get units: ${error}`);
     }
@@ -67,7 +72,7 @@ class UnitRepository implements IUnitRepository {
 
   async getAll(): Promise<Unit[]> {
     try {
-      return await UnitModel.find().populate({
+      return await UnitModel.find().select("-__v").populate({
         path: "company",
         select: "name"
       });

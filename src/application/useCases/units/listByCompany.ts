@@ -21,7 +21,7 @@ export class ListUnitByCompanyUseCase implements ListUnitByCompanyUseCase {
   }
 
   async execute(request: ListAllUnitsByCompanyRequest): Promise<Unit[]> {
-    const { companyId: companyId } = request;
+    const { companyId } = request;
     const listedUnits = await this.unitRepository.getManyByCompanyId(companyId);
 
     return listedUnits;

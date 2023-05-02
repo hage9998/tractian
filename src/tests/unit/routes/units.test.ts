@@ -65,7 +65,7 @@ describe("Test unit routes", () => {
     expect(response.status).toBe(204);
   });
 
-  test("should delete a unit object", async () => {
+  test("should get many units objects by company", async () => {
     sinon
       .stub(UnitRepository.prototype, "getManyByCompanyId")
       .resolves([mockUnit, mockUnit]);

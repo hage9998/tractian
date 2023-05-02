@@ -15,3 +15,10 @@ export interface Unit {
   description: string;
   company?: string;
 }
+
+export interface Company {
+  _id?: string;
+  name: string;
+  description: string;
+  model: string;
+}

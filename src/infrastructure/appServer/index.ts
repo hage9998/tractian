@@ -11,11 +11,13 @@ import {
   registerUseCases,
   registerControllers
 } from "./dependencies";
+import { CompaniesRoutes } from "../../interfaces/routes/companies";
 
 class Server {
   public readonly app: Express;
   private assetsRoutes: AssetsRoutes;
   private unitsRoutes: UnitsRoutes;
+  private companiesRoutes: CompaniesRoutes;
 
   constructor() {
     this.app = express();
@@ -35,11 +37,13 @@ class Server {
   private resolveDependencies() {
     this.assetsRoutes = container.resolve(AssetsRoutes);
     this.unitsRoutes = container.resolve(UnitsRoutes);
+    this.companiesRoutes = container.resolve(CompaniesRoutes);
   }
 
   private initRouters() {
     this.app.use("/tractian", this.assetsRoutes.router);
     this.app.use("/tractian", this.unitsRoutes.router);
+    this.app.use("/tractian", this.companiesRoutes.router);
     this.app.get("/", (_req, res) => {
       res.send("Welcome");
     });
