@@ -71,9 +71,34 @@ import {
   IUpdateUnitUseCase,
   UpdateUnitUseCase
 } from "../../application/useCases/units/update";
+import {
+  ICreateUserUseCase,
+  CreateUserUseCase
+} from "../../application/useCases/users/create";
+import {
+  IDeleteUserUseCase,
+  DeleteUserUseCase
+} from "../../application/useCases/users/delete";
+import {
+  IListAllUsersUseCase,
+  ListAllUsersUseCase
+} from "../../application/useCases/users/listAll";
+import {
+  IListUserByCompanyUseCase,
+  ListUserByCompanyUseCase
+} from "../../application/useCases/users/listByCompany";
+import {
+  IListUserUseCase,
+  ListUserUseCase
+} from "../../application/useCases/users/read";
+import {
+  IUpdateUserUseCase,
+  UpdateUserUseCase
+} from "../../application/useCases/users/update";
 import { IAssetRepository } from "../../domain/repositories/assets";
 import { ICompanyRepository } from "../../domain/repositories/companies";
 import { IUnitRepository } from "../../domain/repositories/units";
+import { IUserRepository } from "../../domain/repositories/users";
 import {
   IAssetsController,
   AssetsController
@@ -86,9 +111,14 @@ import {
   IUnitsController,
   UnitsController
 } from "../../interfaces/controllers/units";
+import {
+  IUsersController,
+  UsersController
+} from "../../interfaces/controllers/users";
 import AssetRepository from "../repositories/assets";
 import CompanyRepository from "../repositories/companies";
 import UnitRepository from "../repositories/units";
+import UserRepository from "../repositories/users";
 
 export const registerRepositories = () => {
   container.registerSingleton<IAssetRepository>(
@@ -104,6 +134,11 @@ export const registerRepositories = () => {
   container.registerSingleton<ICompanyRepository>(
     "ICompanyRepository",
     CompanyRepository
+  );
+
+  container.registerSingleton<IUserRepository>(
+    "IUserRepository",
+    UserRepository
   );
 };
 
@@ -188,6 +223,33 @@ export const registerUseCases = () => {
     "IListAllCompaniesUseCase",
     ListAllCompaniesUseCase
   );
+
+  // Users Use Cases
+
+  container.registerSingleton<ICreateUserUseCase>(
+    "ICreateUserUseCase",
+    CreateUserUseCase
+  );
+  container.registerSingleton<IUpdateUserUseCase>(
+    "IUpdateUserUseCase",
+    UpdateUserUseCase
+  );
+  container.registerSingleton<IListUserUseCase>(
+    "IListUserUseCase",
+    ListUserUseCase
+  );
+  container.registerSingleton<IDeleteUserUseCase>(
+    "IDeleteUserUseCase",
+    DeleteUserUseCase
+  );
+  container.registerSingleton<IListUserByCompanyUseCase>(
+    "IListUserByCompanyUseCase",
+    ListUserByCompanyUseCase
+  );
+  container.registerSingleton<IListAllUsersUseCase>(
+    "IListAllUsersUseCase",
+    ListAllUsersUseCase
+  );
 };
 
 export const registerControllers = () => {
@@ -204,5 +266,10 @@ export const registerControllers = () => {
   container.registerSingleton<ICompaniesController>(
     "ICompaniesController",
     CompaniesController
+  );
+
+  container.registerSingleton<IUsersController>(
+    "IUsersController",
+    UsersController
   );
 };

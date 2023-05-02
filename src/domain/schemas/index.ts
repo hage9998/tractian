@@ -10,6 +10,33 @@ export const CompanySchema = new Schema({
   model: String
 });
 
+export const UserSchema = new Schema({
+  name: String,
+  age: {
+    type: Number,
+    required: true,
+    min: 0,
+    validate: {
+      validator: Number.isInteger,
+      message: "{VALUE} is not an Integer"
+    }
+  },
+  company: {
+    type: Types.ObjectId,
+    ref: "Company",
+    validate: {
+      validator: async (companyId) => {
+        if (companyId) {
+          const company = await mongoose.model("Company").findById(companyId);
+          return company !== null;
+        }
+        return true;
+      },
+      message: "Company does not exist"
+    }
+  }
+});
+
 export const UnitSchema = new Schema({
   name: {
     type: String,

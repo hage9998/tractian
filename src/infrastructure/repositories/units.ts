@@ -27,7 +27,7 @@ class UnitRepository implements IUnitRepository {
 
   async updateById(
     id: string,
-    unit: Partial<Omit<Unit, "owner">>
+    unit: Partial<Omit<Unit, "_id">>
   ): Promise<void> {
     try {
       await UnitModel.updateOne({ _id: id }, unit, { runValidators: true });

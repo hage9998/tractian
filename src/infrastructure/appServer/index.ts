@@ -12,12 +12,14 @@ import {
   registerControllers
 } from "./dependencies";
 import { CompaniesRoutes } from "../../interfaces/routes/companies";
+import { UsersRoutes } from "../../interfaces/routes/users";
 
 class Server {
   public readonly app: Express;
   private assetsRoutes: AssetsRoutes;
   private unitsRoutes: UnitsRoutes;
   private companiesRoutes: CompaniesRoutes;
+  private usersRoutes: UsersRoutes;
 
   constructor() {
     this.app = express();
@@ -38,12 +40,14 @@ class Server {
     this.assetsRoutes = container.resolve(AssetsRoutes);
     this.unitsRoutes = container.resolve(UnitsRoutes);
     this.companiesRoutes = container.resolve(CompaniesRoutes);
+    this.usersRoutes = container.resolve(UsersRoutes);
   }
 
   private initRouters() {
     this.app.use("/tractian", this.assetsRoutes.router);
     this.app.use("/tractian", this.unitsRoutes.router);
     this.app.use("/tractian", this.companiesRoutes.router);
+    this.app.use("/tractian", this.usersRoutes.router);
     this.app.get("/", (_req, res) => {
       res.send("Welcome");
     });
