@@ -6,13 +6,13 @@ import helmet from "helmet";
 import errorMiddleware from "./middlewares";
 import { AssetsRoutes } from "../../interfaces/routes/assets";
 import { container } from "tsyringe";
+import { CompaniesRoutes } from "../../interfaces/routes/companies";
+import { UsersRoutes } from "../../interfaces/routes/users";
 import {
   registerRepositories,
   registerUseCases,
   registerControllers
 } from "./dependencies";
-import { CompaniesRoutes } from "../../interfaces/routes/companies";
-import { UsersRoutes } from "../../interfaces/routes/users";
 
 class Server {
   public readonly app: Express;
