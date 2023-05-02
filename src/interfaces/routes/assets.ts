@@ -17,11 +17,12 @@ export class AssetsRoutes {
   private initializeRoutes(): void {
     this.router.post("/asset", this.assetsController.createAsset);
     this.router.put("/asset", this.assetsController.updateAsset);
-    this.router.get("/asset/:assetId", this.assetsController.listAsset);
     this.router.delete("/asset/:assetId", this.assetsController.deleteAsset);
+    this.router.get("/asset/id/:assetId", this.assetsController.listAsset);
     this.router.get(
       "/asset/owner/:ownerId",
       this.assetsController.listManyAssetByOwner
     );
+    this.router.get("/asset/all", this.assetsController.listAllAssets);
   }
 }

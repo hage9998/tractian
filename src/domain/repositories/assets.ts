@@ -6,4 +6,5 @@ export interface IAssetRepository {
   deleteById(id: string): Promise<void>;
   getById(id: string): Promise<Asset>;
   getManyByOwnerId(ownerId: string): Promise<Asset[]>;
+  getAll(): Promise<Asset[]>;
 }

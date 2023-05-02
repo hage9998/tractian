@@ -1,4 +1,5 @@
 import "reflect-metadata";
+import { UnitsRoutes } from "./../../interfaces/routes/units";
 import express, { Express } from "express";
 import cors from "cors";
 import helmet from "helmet";
@@ -14,6 +15,7 @@ import {
 class Server {
   public readonly app: Express;
   private assetsRoutes: AssetsRoutes;
+  private unitsRoutes: UnitsRoutes;
 
   constructor() {
     this.app = express();
@@ -32,10 +34,12 @@ class Server {
 
   private resolveDependencies() {
     this.assetsRoutes = container.resolve(AssetsRoutes);
+    this.unitsRoutes = container.resolve(UnitsRoutes);
   }
 
   private initRouters() {
     this.app.use("/tractian", this.assetsRoutes.router);
+    this.app.use("/tractian", this.unitsRoutes.router);
     this.app.get("/", (_req, res) => {
       res.send("Welcome");
     });

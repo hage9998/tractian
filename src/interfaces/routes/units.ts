@@ -15,11 +15,12 @@ export class UnitsRoutes {
   private initializeRoutes(): void {
     this.router.post("/unit", this.unitsController.createUnit);
     this.router.put("/unit", this.unitsController.updateUnit);
-    this.router.get("/unit/:unitId", this.unitsController.listUnit);
     this.router.delete("/unit/:unitId", this.unitsController.deleteUnit);
+    this.router.get("/unit/id/:unitId", this.unitsController.listUnit);
     this.router.get(
       "/unit/company/:companyId",
       this.unitsController.listManyUnitByCompany
     );
+    this.router.get("/unit/all", this.unitsController.listAllUnits);
   }
 }

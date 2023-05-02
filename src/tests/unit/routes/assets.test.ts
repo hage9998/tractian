@@ -1,9 +1,9 @@
-import { mockAsset } from "./../../mocks/index";
+import { mockAsset } from "../mocks/index";
 import sinon from "sinon";
 import request from "supertest";
-import Server from "../../../../infrastructure/appServer";
-import AssetRepository from "../../../../infrastructure/repositories/assets";
-import { UpdateAssetRequest } from "../../../../application/useCases/assets/update";
+import Server from "../../../infrastructure/appServer";
+import AssetRepository from "../../../infrastructure/repositories/assets";
+import { UpdateAssetRequest } from "../../../application/useCases/assets/update";
 
 describe("Test asset routes", () => {
   const server = new Server();
@@ -48,7 +48,7 @@ describe("Test asset routes", () => {
     sinon.stub(AssetRepository.prototype, "getById").resolves(mockAsset);
 
     const response = await request(server.app).get(
-      `/tractian/asset/${mockAsset._id}`
+      `/tractian/asset/id/${mockAsset._id}`
     );
 
     expect(response.status).toBe(200);
@@ -73,6 +73,17 @@ describe("Test asset routes", () => {
     const response = await request(server.app).get(
       `/tractian/asset/owner/${mockAsset.owner}`
     );
+
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual([mockAsset, mockAsset]);
+  });
+
+  test("should list all assets objects", async () => {
+    sinon
+      .stub(AssetRepository.prototype, "getAll")
+      .resolves([mockAsset, mockAsset]);
+
+    const response = await request(server.app).get("/tractian/asset/all/");
 
     expect(response.status).toBe(200);
     expect(response.body).toEqual([mockAsset, mockAsset]);

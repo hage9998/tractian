@@ -1,13 +1,37 @@
-import { Schema, Types } from "mongoose";
+import mongoose, { Schema, Types } from "mongoose";
+
+export const UnitSchema = new Schema({
+  name: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  description: String,
+  company: { type: Types.ObjectId, ref: "Company" }
+});
 
 export const AssetSchema = new Schema({
   name: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   description: String,
   model: String,
-  owner: { type: Types.ObjectId, ref: "Unit" },
+  owner: {
+    type: Types.ObjectId,
+    ref: "Unit",
+    validate: {
+      validator: async (unitId) => {
+        if (unitId) {
+          const unit = await mongoose.model("Unit").findById(unitId);
+          return unit !== null;
+        }
+        return true;
+      },
+      message: "Unit does not exist"
+    }
+  },
   status: {
     type: String,
     enum: ["Running", "Alerting", "Stopped"],
@@ -20,14 +44,4 @@ export const AssetSchema = new Schema({
     default: 100
   },
   image: String
-});
-
-export const UnitSchema = new Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  description: String,
-  company: { type: Types.ObjectId, ref: "Company" },
-  assets: [{ type: Types.ObjectId, ref: "Unit" }]
 });

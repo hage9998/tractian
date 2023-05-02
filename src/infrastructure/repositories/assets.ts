@@ -1,63 +1,81 @@
-import { IUnitRepository } from "../../domain/repositories/units";
-import { Unit } from "../../domain/types";
+import { IAssetRepository } from "../../domain/repositories/assets";
+import { Asset } from "../../domain/types";
 import { injectable } from "tsyringe";
-import { UnitModel } from "../../domain/models";
+import { AssetModel } from "../../domain/models";
 import { Types } from "mongoose";
 
 @injectable()
-class UnitRepository implements IUnitRepository {
-  async create(unit: Unit): Promise<Unit> {
-    const { name, description, company } = unit;
+class AssetRepository implements IAssetRepository {
+  async create(asset: Asset): Promise<Asset> {
+    const { name, description, healthLevel, image, model, status, owner } =
+      asset;
     try {
-      const createdUnit = await UnitModel.create({
+      const createdAsset = await AssetModel.create({
         name,
         description,
-        company
+        model,
+        status,
+        healthLevel,
+        image,
+        owner
       });
 
       return {
-        _id: createdUnit._id.toString(),
-        ...unit
-      } as Unit;
+        _id: createdAsset._id.toString(),
+        ...asset
+      } as Asset;
     } catch (error) {
-      throw new Error(`Failed to create new unit: ${error}`);
+      throw new Error(`Failed to create new asset: ${error}`);
     }
   }
 
   async updateById(
     id: string,
-    unit: Partial<Omit<Unit, "owner">>
+    asset: Partial<Omit<Asset, "_id">>
   ): Promise<void> {
     try {
-      await UnitModel.updateOne({ _id: id }, unit, { runValidators: true });
+      await AssetModel.updateOne({ _id: id }, asset, { runValidators: true });
     } catch (error) {
-      throw new Error(`Failed to update unit: ${error}`);
+      throw new Error(`Failed to update asset: ${error}`);
     }
   }
 
   async deleteById(id: string): Promise<void> {
     try {
-      await UnitModel.deleteOne({ _id: id });
+      await AssetModel.deleteOne({ _id: id });
     } catch (error) {
-      throw new Error(`Failed to delete unit: ${error}`);
+      throw new Error(`Failed to delete asset: ${error}`);
     }
   }
 
-  async getById(id: string): Promise<Unit> {
+  async getById(id: string): Promise<Asset> {
     try {
-      return await UnitModel.findOne({ _id: id });
+      return await AssetModel.findOne({ _id: id });
     } catch (error) {
-      throw new Error(`Failed to get unit: ${error}`);
+      throw new Error(`Failed to get asset: ${error}`);
     }
   }
 
-  async getManyByCompanyId(companyId: string): Promise<Unit[]> {
+  async getManyByOwnerId(ownerId: string): Promise<Asset[]> {
     try {
-      return await UnitModel.find({ owner: new Types.ObjectId(companyId) });
+      return await AssetModel.find({
+        owner: new Types.ObjectId(ownerId)
+      }).populate({ path: "owner", select: "name" });
     } catch (error) {
-      throw new Error(`Failed to get units: ${error}`);
+      throw new Error(`Failed to get assets: ${error}`);
+    }
+  }
+
+  async getAll(): Promise<Asset[]> {
+    try {
+      return await AssetModel.find().populate({
+        path: "owner",
+        select: "name"
+      });
+    } catch (error) {
+      throw new Error(`Failed to get assets: ${error}`);
     }
   }
 }
 
-export default UnitRepository;
+export default AssetRepository;

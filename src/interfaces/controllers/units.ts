@@ -5,6 +5,7 @@ import {
   CreateUnitRequest
 } from "../../application/useCases/units/create";
 import { IDeleteUnitUseCase } from "../../application/useCases/units/delete";
+import { IListAllUnitsUseCase } from "../../application/useCases/units/listAll";
 import { IListUnitByCompanyUseCase } from "../../application/useCases/units/listByCompany";
 import { IListUnitUseCase } from "../../application/useCases/units/read";
 import {
@@ -22,6 +23,7 @@ export interface IUnitsController {
     res: Response,
     next: NextFunction
   ): Promise<void>;
+  listAllUnits(req: Request, res: Response, next: NextFunction): Promise<void>;
 }
 
 @injectable()
@@ -31,6 +33,7 @@ export class UnitsController implements IUnitsController {
   private listUnitUseCase: IListUnitUseCase;
   private deleteUnitUseCase: IDeleteUnitUseCase;
   private listUnitByCompanyUseCase: IListUnitByCompanyUseCase;
+  private listAllUnitsUseCase: IListAllUnitsUseCase;
 
   constructor(
     @inject("ICreateUnitUseCase") createUnitUseCase: ICreateUnitUseCase,
@@ -38,24 +41,28 @@ export class UnitsController implements IUnitsController {
     @inject("IListUnitUseCase") listUnitUseCase: IListUnitUseCase,
     @inject("IDeleteUnitUseCase") deleteUnitUseCase: IDeleteUnitUseCase,
     @inject("IListUnitByCompanyUseCase")
-    listUnitByCompanyUseCase: IListUnitByCompanyUseCase
+    listUnitByCompanyUseCase: IListUnitByCompanyUseCase,
+    @inject("IListAllUnitsUseCase") listAllUnitsUseCase: IListAllUnitsUseCase
   ) {
     this.createUnitUseCase = createUnitUseCase;
     this.updateUnitUseCase = updateUnitUseCase;
     this.listUnitUseCase = listUnitUseCase;
     this.deleteUnitUseCase = deleteUnitUseCase;
     this.listUnitByCompanyUseCase = listUnitByCompanyUseCase;
+    this.listAllUnitsUseCase = listAllUnitsUseCase;
 
     this.createUnit = this.createUnit.bind(this);
     this.updateUnit = this.updateUnit.bind(this);
     this.listUnit = this.listUnit.bind(this);
     this.deleteUnit = this.deleteUnit.bind(this);
     this.listManyUnitByCompany = this.listManyUnitByCompany.bind(this);
+    this.listAllUnits = this.listAllUnits.bind(this);
   }
 
   async createUnit(req: Request, res: Response, next: NextFunction) {
     try {
       const { unit }: CreateUnitRequest = req.body;
+
       const response = await this.createUnitUseCase.execute({ unit });
 
       res.status(200).json(response);
@@ -110,6 +117,16 @@ export class UnitsController implements IUnitsController {
       const response = await this.listUnitByCompanyUseCase.execute({
         companyId
       });
+
+      res.status(200).json(response);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async listAllUnits(_req: Request, res: Response, next: NextFunction) {
+    try {
+      const response = await this.listAllUnitsUseCase.execute(null);
 
       res.status(200).json(response);
     } catch (error) {

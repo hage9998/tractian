@@ -13,7 +13,7 @@ export type IListAssetAllByOwnerUseCase = UseCase<
 >;
 
 @injectable()
-export class ListAssetAllByOwnerUseCase implements ListAssetAllByOwnerUseCase {
+export class ListAssetAllByOwnerUseCase implements IListAssetAllByOwnerUseCase {
   private assetRepository: IAssetRepository;
 
   constructor(@inject("IAssetRepository") assetRepository: IAssetRepository) {

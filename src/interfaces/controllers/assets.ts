@@ -5,6 +5,7 @@ import {
   ICreateAssetUseCase
 } from "../../application/useCases/assets/create";
 import { IDeleteAssetUseCase } from "../../application/useCases/assets/delete";
+import { IListAllAssetsUseCase } from "../../application/useCases/assets/listAll";
 import { IListAssetAllByOwnerUseCase } from "../../application/useCases/assets/listByOwner";
 import { IListAssetUseCase } from "../../application/useCases/assets/read";
 import {
@@ -22,6 +23,7 @@ export interface IAssetsController {
     res: Response,
     next: NextFunction
   ): Promise<void>;
+  listAllAssets(req: Request, res: Response, next: NextFunction): Promise<void>;
 }
 
 @injectable()
@@ -31,6 +33,7 @@ export class AssetsController implements IAssetsController {
   private listAssetUseCase: IListAssetUseCase;
   private deleteAssetUseCase: IDeleteAssetUseCase;
   private listAssetAllByOwnerUseCase: IListAssetAllByOwnerUseCase;
+  private listAllAssetsUseCase: IListAllAssetsUseCase;
 
   constructor(
     @inject("ICreateAssetUseCase") createAssetUseCase: ICreateAssetUseCase,
@@ -38,19 +41,22 @@ export class AssetsController implements IAssetsController {
     @inject("IListAssetUseCase") listAssetUseCase: IListAssetUseCase,
     @inject("IDeleteAssetUseCase") deleteAssetUseCase: IDeleteAssetUseCase,
     @inject("IListAssetAllByOwnerUseCase")
-    listAssetAllByOwnerUseCase: IListAssetAllByOwnerUseCase
+    listAssetAllByOwnerUseCase: IListAssetAllByOwnerUseCase,
+    @inject("IListAllAssetsUseCase") listAllAssetsUseCase: IListAllAssetsUseCase
   ) {
     this.createAssetUseCase = createAssetUseCase;
     this.updateAssetUseCase = updateAssetUseCase;
     this.listAssetUseCase = listAssetUseCase;
     this.deleteAssetUseCase = deleteAssetUseCase;
     this.listAssetAllByOwnerUseCase = listAssetAllByOwnerUseCase;
+    this.listAllAssetsUseCase = listAllAssetsUseCase;
 
     this.createAsset = this.createAsset.bind(this);
     this.updateAsset = this.updateAsset.bind(this);
     this.listAsset = this.listAsset.bind(this);
     this.deleteAsset = this.deleteAsset.bind(this);
     this.listManyAssetByOwner = this.listManyAssetByOwner.bind(this);
+    this.listAllAssets = this.listAllAssets.bind(this);
   }
 
   async createAsset(req: Request, res: Response, next: NextFunction) {
@@ -110,6 +116,16 @@ export class AssetsController implements IAssetsController {
       const response = await this.listAssetAllByOwnerUseCase.execute({
         ownerId
       });
+
+      res.status(200).json(response);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async listAllAssets(_req: Request, res: Response, next: NextFunction) {
+    try {
+      const response = await this.listAllAssetsUseCase.execute(null);
 
       res.status(200).json(response);
     } catch (error) {

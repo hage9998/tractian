@@ -25,7 +25,7 @@ export class ListUnitUseCase implements IListUnitUseCase {
         _id: listedUnit._id,
         name: listedUnit.name,
         description: listedUnit.description,
-        assets: listedUnit.assets
+        company: listedUnit.company
       };
 
       return responseUnit;

@@ -6,4 +6,5 @@ export interface IUnitRepository {
   deleteById(id: string): Promise<void>;
   getById(id: string): Promise<Unit>;
   getManyByCompanyId(companyId: string): Promise<Unit[]>;
+  getAll(): Promise<Unit[]>;
 }

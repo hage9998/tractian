@@ -14,5 +14,4 @@ export interface Unit {
   name: string;
   description: string;
   company?: string;
-  assets: string[];
 }
