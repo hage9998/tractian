@@ -122,6 +122,7 @@ export class CompaniesController implements ICompaniesController {
   async listCompanyWithUnits(req: Request, res: Response, next: NextFunction) {
     try {
       const { companyId } = req.params;
+
       const response = await this.listCompanyWithUnitsUseCase.execute({
         companyId
       });

@@ -58,7 +58,7 @@ class UnitRepository implements IUnitRepository {
   async getManyByCompanyId(companyId: string): Promise<Unit[]> {
     try {
       return await UnitModel.find({
-        owner: new Types.ObjectId(companyId)
+        company: new Types.ObjectId(companyId)
       })
         .select("-__v")
         .populate({

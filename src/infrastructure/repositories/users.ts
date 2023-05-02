@@ -58,7 +58,7 @@ class UserRepository implements IUserRepository {
   async getManyByCompanyId(companyId: string): Promise<User[]> {
     try {
       return await UserModel.find({
-        owner: new Types.ObjectId(companyId)
+        company: new Types.ObjectId(companyId)
       })
         .select("-__v")
         .populate({

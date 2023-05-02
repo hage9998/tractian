@@ -2,6 +2,7 @@ import { ICompanyRepository } from "../../domain/repositories/companies";
 import { Company } from "../../domain/types";
 import { injectable } from "tsyringe";
 import { CompanyModel } from "../../domain/models";
+import { Types } from "mongoose";
 
 @injectable()
 class CompanyRepository implements ICompanyRepository {
@@ -68,16 +69,29 @@ class CompanyRepository implements ICompanyRepository {
   async getCompanyWithUnits(companyId: string): Promise<Company> {
     try {
       const company = await CompanyModel.aggregate([
-        { $match: { _id: companyId } },
+        { $match: { _id: new Types.ObjectId(companyId) } },
         {
           $lookup: {
-            from: "Unit",
+            from: "units",
             localField: "_id",
             foreignField: "company",
             as: "units"
           }
+        },
+        {
+          $project: {
+            name: 1,
+            description: 1,
+            model: 1,
+            units: {
+              _id: 1,
+              name: 1,
+              description: 1
+            }
+          }
         }
       ]);
+
       if (company.length > 0) return company[0];
       throw new Error("Company not found");
     } catch (error) {
