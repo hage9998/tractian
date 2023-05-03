@@ -25,7 +25,7 @@ export class Database implements DatabaseMethods {
 
   async initConnection(): Promise<void> {
     await mongoose.connect(
-      `mongodb+srv://${this.username}:${this.password}@${this.name}.3sculol.mongodb.net/?retryWrites=true&w=majority`
+      `mongodb+srv://${this.username}:${this.password}@${this.name}.3sculol.mongodb.net/${this.name}?retryWrites=true&w=majority`
     );
   }
 }

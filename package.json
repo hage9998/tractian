@@ -5,9 +5,12 @@
   "main": "src/app.ts",
   "scripts": {
     "test": "jest",
-    "start": "tsc && node dist/app.js",
+    "start": "node dist/app.js",
     "start:dev": "nodemon --watch 'src/' --exec 'ts-node src/app.ts' -e ts",
-    "lint": "eslint ./src"
+    "lint": "eslint ./src",
+    "tsc": "./node_modules/typescript/bin/tsc",
+    "build": "tsc",
+    "postinstall": "npm run build"
   },
   "author": "Lucas Hage",
   "license": "ISC",
@@ -19,7 +22,6 @@
     "@types/sinon": "^10.0.14",
     "@typescript-eslint/eslint-plugin": "^5.59.1",
     "@typescript-eslint/parser": "^5.59.1",
-    "dotenv": "^16.0.3",
     "eslint": "^8.39.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
@@ -33,6 +35,7 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
+    "dotenv": "^16.0.3",
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "helmet": "^6.1.5",
