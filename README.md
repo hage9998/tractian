@@ -61,7 +61,7 @@ RESPONSE
     "image": "string",
     "owner": {
       "_id": "string",
-      "name": "string",
+      "name": "string"
     }
 }
 ```
@@ -80,7 +80,7 @@ RESPONSE
     "image": "string",
     "owner": {
       "_id": "string",
-      "name": "string",
+      "name": "string"
     }
 }
 
@@ -101,7 +101,7 @@ RESPONSE
         "image": "string",
         "owner": {
           "_id": "string",
-          "name": "string",
+          "name": "string"
         }      
     }
 ]
@@ -157,7 +157,7 @@ RESPONSE
     "description": "string",
     "company": {
       "_id": "string",
-      "name": "string",
+      "name": "string"
     }
 }
 ```
@@ -172,7 +172,7 @@ RESPONSE
     "description": "string",
     "company": {
       "_id": "string",
-      "name": "string",
+      "name": "string"
     }
 }
 
@@ -189,7 +189,7 @@ RESPONSE
         "description": "string",
         "company": {
           "_id": "string",
-          "name": "string",
+          "name": "string"
         }
     }
 ]
@@ -225,3 +225,84 @@ REQUEST
 DELETE /tractian/unit/:unitId
 
 ---
+
+### User endpoint
+GET /tractian/user/:userId
+
+RESPONSE
+```json
+{
+    "_id": "string",
+    "name": "string",
+    "age": "number",
+    "company": {
+      "_id": "string",
+      "name": "string"
+    }
+}
+```
+---
+GET /tractian/user/company/:companyId
+
+RESPONSE
+```json
+{
+    "_id": "string",
+    "name": "string",
+    "age": "number",
+    "company": {
+      "_id": "string",
+      "name": "string"
+    }
+}
+
+```
+---
+GET /tractian/user/all
+
+RESPONSE
+```json
+[
+     {
+        "_id": "string",
+        "name": "string",
+        "age": "number",
+        "company": {
+          "_id": "string",
+          "name": "string"
+        }
+    }
+]
+```
+---
+POST /tractian/user/
+
+REQUEST
+```json
+{  
+    "user": {
+        "name": "string",
+        "age": "number",
+        "company": "string"
+    }
+}
+```
+---
+PUT /tractian/user/
+
+REQUEST
+```json
+{  
+    "userId": "string",
+    "user": {
+        "name": "string",
+        "age": "number",
+        "company": "string"
+    }
+}
+```
+---
+DELETE /tractian/unit/:unitId
+
+---
+
