@@ -45,6 +45,8 @@ The API was created using Node's Express Framework, which offers several feature
 The following is an API documentation.
 
 ## API ENDPOINTS
+<br>
+__name__ are unique values
 
 ### Assets endpoint
 GET /tractian/asset/id/:assetId
