@@ -47,18 +47,97 @@ The following is an API documentation.
 ## API ENDPOINTS
 
 ### Assets endpoint
-GET /asset/id/:assetId
+GET /tractian/asset/id/:assetId
+
+RESPONSE
+```json
+{
+    "_id": "64528c3fdedaf68bda568f22",
+    "name": "TestTractian",
+    "description": "Test",
+    "model": "ModelTest",
+    "status": "Running",
+    "image": "laal.com",
+    "owner": {
+      "_id": "64526aa3a5d520ba05036c40",
+      "name": "TestTractianUnit",
+    }
+}
+```
+---
+GET /tractian/asset/owner/:ownerId
+
+RESPONSE
+```json
+{
+    "_id": "64528c3fdedaf68bda568f22",
+    "name": "TestTractian",
+    "description": "Test",
+    "model": "ModelTest",
+    "status": "Running",
+    "image": "laal.com",
+    "owner": {
+      "_id": "64526aa3a5d520ba05036c40",
+      "name": "TestTractianUnit",
+    }
+}
+
+```
+---
+GET /tractian/asset/all
+
+RESPONSE
+```json
+[
+    {
+        "_id": "64528c3fdedaf68bda568f22",
+        "name": "TestTractian",
+        "description": "Test",
+        "model": "ModelTest",
+        "status": "Running",
+        "image": "laal.com",
+        "owner": {
+          "_id": "64526aa3a5d520ba05036c40",
+          "name": "TestTractianUnit",
+        }      
+    }
+]
+```
+---
+POST /tractian/asset/
 
 REQUEST
 ```json
-{
-  "_id": "TestId",
-  "name": "Test",
-  "description": "Test Descrption",
-  "model": "TestModel",
-  "status": "Running",
-  "healthLevel": 50,
-  "image": "www.image.com",
-  "owner": "TestOwner"
+{  
+    "asset": {
+        "name": "TestTractian",
+        "description": "Test",
+        "model": "ModelTest",
+        "status": "Running",
+        "image": "laal.com",
+        "owner": "64526aa3a5d520ba05036c40"
+    }
 }
 ```
+---
+PUT /tractian/asset/
+
+REQUEST
+```json
+{  
+    "assetId": "64528c3fdedaf68bda568f22",
+    "asset": {
+        "name": "TestTractian",
+        "description": "Test",
+        "model": "ModelTest",
+        "status": "Running",
+        "image": "laal.com",
+        "owner": "64526aa3a5d520ba05036c40"
+    }
+}
+```
+---
+DELETE /tractian/asset/:assetId
+
+---
+
