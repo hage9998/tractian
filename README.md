@@ -46,7 +46,7 @@ The following is an API documentation.
 
 ## API ENDPOINTS
 <br>
-__name__ are unique values
+** name ** is a unique value
 
 ### Assets endpoint
 GET /tractian/asset/id/:assetId
@@ -229,7 +229,7 @@ DELETE /tractian/unit/:unitId
 ---
 
 ### User endpoint
-GET /tractian/user/:userId
+GET /tractian/user/id/:userId
 
 RESPONSE
 ```json
@@ -308,3 +308,80 @@ DELETE /tractian/unit/:unitId
 
 ---
 
+### Companies endpoint
+GET /tractian/company/id/:companyId
+
+RESPONSE
+```json
+{
+    "_id": "string",
+    "name": "string",
+    "description": "string",
+    "model": "string"
+}
+```
+---
+GET /tractian/company/:companyId/units
+
+RESPONSE
+```json
+{
+    "_id": "string",
+    "name": "string",
+    "description": "string",
+    "model": "string",
+    "units": [
+        {
+          "_id": "string",
+          "name": "string"
+        }
+    ]
+}
+
+```
+---
+GET /tractian/company/all
+
+RESPONSE
+```json
+[
+   {
+        "_id": "string",
+        "name": "string",
+        "description": "string",
+        "model": "string"
+    }
+]
+```
+---
+POST /tractian/company/
+
+REQUEST
+```json
+{  
+    "user": {
+        "name": "string",
+        "age": "number",
+        "company": "string",
+        "model": "string"
+    }
+}
+```
+---
+PUT /tractian/company/
+
+REQUEST
+```json
+{  
+    "user": {
+        "name": "string",
+        "age": "number",
+        "company": "string",
+        "model": "string"
+    }
+}
+```
+---
+DELETE /tractian/company/:companyId
+
+---
