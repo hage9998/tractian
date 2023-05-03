@@ -1,7 +1,7 @@
+import Server from "../../../interfaces/appServer";
 import { mockAsset } from "../mocks/index";
 import sinon from "sinon";
 import request from "supertest";
-import Server from "../../../infrastructure/appServer";
 import AssetRepository from "../../../infrastructure/repositories/assets";
 import { UpdateAssetRequest } from "../../../application/useCases/assets/update";
 

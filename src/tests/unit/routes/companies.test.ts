@@ -1,7 +1,7 @@
+import Server from "../../../interfaces/appServer";
 import { mockCompany, mockCompanyWithUnits } from "../mocks/index";
 import sinon from "sinon";
 import request from "supertest";
-import Server from "../../../infrastructure/appServer";
 import CompanyRepository from "../../../infrastructure/repositories/companies";
 import { UpdateCompanyRequest } from "../../../application/useCases/companies/update";
 

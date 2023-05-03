@@ -1,7 +1,7 @@
+import Server from "../../../interfaces/appServer";
 import { mockUnit } from "../mocks/index";
 import sinon from "sinon";
 import request from "supertest";
-import Server from "../../../infrastructure/appServer";
 import UnitRepository from "../../../infrastructure/repositories/units";
 import { UpdateUnitRequest } from "../../../application/useCases/units/update";
 

@@ -1,7 +1,7 @@
+import Server from "../../../interfaces/appServer";
 import { mockUser } from "../mocks/index";
 import sinon from "sinon";
 import request from "supertest";
-import Server from "../../../infrastructure/appServer";
 import UserRepository from "../../../infrastructure/repositories/users";
 import { UpdateUserRequest } from "../../../application/useCases/users/update";
 

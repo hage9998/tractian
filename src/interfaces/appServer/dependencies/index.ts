@@ -3,6 +3,10 @@ import { IAssetRepository } from "../../../domain/repositories/assets";
 import { ICompanyRepository } from "../../../domain/repositories/companies";
 import { IUnitRepository } from "../../../domain/repositories/units";
 import { IUserRepository } from "../../../domain/repositories/users";
+import AssetRepository from "../../../infrastructure/repositories/assets";
+import CompanyRepository from "../../../infrastructure/repositories/companies";
+import UnitRepository from "../../../infrastructure/repositories/units";
+import UserRepository from "../../../infrastructure/repositories/users";
 import {
   IAssetsController,
   AssetsController
@@ -19,10 +23,7 @@ import {
   IUsersController,
   UsersController
 } from "../../../interfaces/controllers/users";
-import AssetRepository from "../../repositories/assets";
-import CompanyRepository from "../../repositories/companies";
-import UnitRepository from "../../repositories/units";
-import UserRepository from "../../repositories/users";
+
 import registerAssetsUseCases from "./userCases/assets";
 import registerCompaniesUserCases from "./userCases/companies";
 import registerUnitsUseCases from "./userCases/units";

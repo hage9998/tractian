@@ -1,6 +1,7 @@
+import "reflect-metadata";
 import config from "./commons/config";
-import Server from "./infrastructure/appServer";
 import dbInstance from "./infrastructure/database";
+import Server from "./interfaces/appServer";
 
 const startServer = () => {
   {
