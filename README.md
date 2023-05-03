@@ -53,14 +53,15 @@ RESPONSE
 ```json
 {
     "_id": "64528c3fdedaf68bda568f22",
-    "name": "TestTractian",
-    "description": "Test",
-    "model": "ModelTest",
-    "status": "Running",
-    "image": "laal.com",
+    "name": "string",
+    "description": "string",
+    "model": "string",
+    "status": "string",
+    "healthLevel": "number",
+    "image": "string",
     "owner": {
-      "_id": "64526aa3a5d520ba05036c40",
-      "name": "TestTractianUnit",
+      "_id": "string",
+      "name": "string",
     }
 }
 ```
@@ -70,15 +71,16 @@ GET /tractian/asset/owner/:ownerId
 RESPONSE
 ```json
 {
-    "_id": "64528c3fdedaf68bda568f22",
-    "name": "TestTractian",
-    "description": "Test",
-    "model": "ModelTest",
-    "status": "Running",
-    "image": "laal.com",
+    "_id": "string",
+    "name": "string",
+    "description": "string",
+    "model": "string",
+    "status": "string",
+    "healthLevel": "number",
+    "image": "string",
     "owner": {
-      "_id": "64526aa3a5d520ba05036c40",
-      "name": "TestTractianUnit",
+      "_id": "string",
+      "name": "string",
     }
 }
 
@@ -90,15 +92,16 @@ RESPONSE
 ```json
 [
     {
-        "_id": "64528c3fdedaf68bda568f22",
-        "name": "TestTractian",
-        "description": "Test",
-        "model": "ModelTest",
-        "status": "Running",
-        "image": "laal.com",
+        "_id": "string",
+        "name": "string",
+        "description": "string",
+        "model": "string",
+        "status": "string",
+        "healthLevel": "number",
+        "image": "string",
         "owner": {
-          "_id": "64526aa3a5d520ba05036c40",
-          "name": "TestTractianUnit",
+          "_id": "string",
+          "name": "string",
         }      
     }
 ]
@@ -110,12 +113,13 @@ REQUEST
 ```json
 {  
     "asset": {
-        "name": "TestTractian",
-        "description": "Test",
-        "model": "ModelTest",
-        "status": "Running",
-        "image": "laal.com",
-        "owner": "64526aa3a5d520ba05036c40"
+        "name": "string",
+        "description": "string",
+        "model": "string",
+        "status": "string",
+        "healthLevel": "number",
+        "image": "string",
+        "owner": "string"
     }
 }
 ```
@@ -125,14 +129,15 @@ PUT /tractian/asset/
 REQUEST
 ```json
 {  
-    "assetId": "64528c3fdedaf68bda568f22",
+    "assetId": "string",
     "asset": {
-        "name": "TestTractian",
-        "description": "Test",
-        "model": "ModelTest",
-        "status": "Running",
-        "image": "laal.com",
-        "owner": "64526aa3a5d520ba05036c40"
+        "name": "string",
+        "description": "string",
+        "model": "string",
+        "status": "string",
+        "healthLevel": "number",
+        "image": "string",
+        "owner": "string"
     }
 }
 ```
@@ -141,3 +146,82 @@ DELETE /tractian/asset/:assetId
 
 ---
 
+### Units endpoint
+GET /tractian/unit/id/:unitId
+
+RESPONSE
+```json
+{
+    "_id": "string",
+    "name": "string",
+    "description": "string",
+    "company": {
+      "_id": "string",
+      "name": "string",
+    }
+}
+```
+---
+GET /tractian/unit/company/:companyId
+
+RESPONSE
+```json
+{
+    "_id": "string",
+    "name": "string",
+    "description": "string",
+    "company": {
+      "_id": "string",
+      "name": "string",
+    }
+}
+
+```
+---
+GET /tractian/unit/all
+
+RESPONSE
+```json
+[
+    {
+        "_id": "string",
+        "name": "string",
+        "description": "string",
+        "company": {
+          "_id": "string",
+          "name": "string",
+        }
+    }
+]
+```
+---
+POST /tractian/unit/
+
+REQUEST
+```json
+{  
+    "unit": {
+        "name": "string",
+        "description": "string",
+        "company": "string"
+    }
+}
+```
+---
+PUT /tractian/unit/
+
+REQUEST
+```json
+{  
+    "unitId": "string",
+    "unit": {
+        "name": "string",
+        "description": "string",
+        "company": "string"
+    }
+}
+```
+---
+DELETE /tractian/unit/:unitId
+
+---
